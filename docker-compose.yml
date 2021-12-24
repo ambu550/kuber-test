@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+    test-python:
+        build: ./sa-logic
+        container_name: test-python
+        ports:
+            - "5000:5000"
+        networks:
+            - test-network_2
+    test-java:
+        build: ./sa-webapp
+        container_name: test-java
+#        environment:
+#            - SA_LOGIC_API_URL=http://test-python:5000
+        ports:
+            - "8080:8080"
+        networks:
+            - test-network_2
+    test-front:
+        build: ./sa-frontend
+        container_name: test-front
+        ports:
+            - "80:80"
+        networks:
+            - test-network_2
+
+networks:
+    test-network_2:
+        name: test-network_2
